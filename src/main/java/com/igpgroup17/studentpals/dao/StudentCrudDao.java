@@ -1,6 +1,6 @@
 package com.igpgroup17.studentpals.dao;
 
-import com.igpgroup17.studentpals.models.Student;
+        import com.igpgroup17.studentpals.models.Student;
 
 public interface StudentCrudDao {
      Student createStudent(Student user);
