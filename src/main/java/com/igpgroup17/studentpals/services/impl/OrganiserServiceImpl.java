@@ -34,6 +34,6 @@ public class OrganiserServiceImpl implements OrganiserService {
     @Override
     public String deleteOrganiser(String id) {
         organiserCrudDao.deleteOrganiser(id);
-        return "Deleted student";
+        return "Deleted organiser";
     }
 }
