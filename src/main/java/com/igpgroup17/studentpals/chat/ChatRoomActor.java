@@ -10,18 +10,27 @@ public class ChatRoomActor extends AbstractBehavior<ChatRoomActor.MessageType> {
 
     interface MessageType {
         String sender();
+
+        String room();
     }
 
     public static class Join implements MessageType {
 
         private final String sender;
 
-        public Join(String sender) {
+        private final String room;
+
+        public Join(String sender, String room) {
             this.sender = sender;
+            this.room = room;
         }
 
         public String sender() {
             return sender;
+        }
+
+        public String room() {
+            return room;
         }
     }
 
@@ -29,44 +38,42 @@ public class ChatRoomActor extends AbstractBehavior<ChatRoomActor.MessageType> {
 
         private final String sender;
 
-        public Leave(String sender) {
+        private final String room;
+
+        public Leave(String sender, String room) {
             this.sender = sender;
+            this.room = room;
         }
 
         public String sender() {
             return sender;
         }
+
+        public String room() {
+            return room;
+        }
     }
 
-    public static class MessageSend implements MessageType {
+    public static class Message implements MessageType {
 
         private final String sender;
 
+        private final String room;
+
         public final String message;
 
-        public MessageSend(String sender, String message) {
+        public Message(String sender, String room, String message) {
             this.sender = sender;
+            this.room = room;
             this.message = message;
         }
 
         public String sender() {
             return sender;
         }
-    }
 
-    public static class MessageReceive implements MessageType {
-
-        private final String sender;
-
-        public final String message;
-
-        public MessageReceive(String sender, String message) {
-            this.sender = sender;
-            this.message = message;
-        }
-
-        public String sender() {
-            return sender;
+        public String room() {
+            return room;
         }
     }
 
@@ -83,8 +90,7 @@ public class ChatRoomActor extends AbstractBehavior<ChatRoomActor.MessageType> {
         return newReceiveBuilder()
                 .onMessage(Join.class, this::onJoin)
                 .onMessage(Leave.class, this::onLeave)
-                .onMessage(MessageSend.class, this::onSend)
-                .onMessage(MessageReceive.class, this::onReceive)
+                .onMessage(Message.class, this::onMessage)
                 .build();
     }
 
@@ -96,11 +102,7 @@ public class ChatRoomActor extends AbstractBehavior<ChatRoomActor.MessageType> {
         return this;
     }
 
-    private Behavior<MessageType> onSend(MessageSend message) {
-        return this;
-    }
-
-    private Behavior<MessageType> onReceive(MessageReceive message) {
+    private Behavior<MessageType> onMessage(Message message) {
         return this;
     }
 }
