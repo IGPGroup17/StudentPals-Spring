@@ -2,6 +2,7 @@ package com.igpgroup17.studentpals.services.impl;
 
 import com.igpgroup17.studentpals.dao.EventCrudDao;
 import com.igpgroup17.studentpals.models.Event;
+import com.igpgroup17.studentpals.models.Student;
 import com.igpgroup17.studentpals.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,12 @@ public class EventServiceImpl implements EventService {
     public Event createEvent(Event event) {
         return eventCrudDao.createEvent(event);
     }
+
+    @Override
+    public Student addStudent(Student student) {return this.eventCrudDao.addStudent(student); }
+
+    @Override
+    public Student addInterestedStudent(Student student) {return this.eventCrudDao.addInterestedStudent(student); }
 
     @Override
     public Event readEvent(String id) {
