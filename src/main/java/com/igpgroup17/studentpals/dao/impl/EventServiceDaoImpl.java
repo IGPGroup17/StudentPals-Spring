@@ -7,6 +7,7 @@ import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.ExpectedAttributeValue;
 import com.igpgroup17.studentpals.dao.EventCrudDao;
 import com.igpgroup17.studentpals.models.Event;
+import com.igpgroup17.studentpals.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,9 +25,9 @@ public class EventServiceDaoImpl implements EventCrudDao {
     }
 
     @Override
-    public Event createEvent(Event user) {
-        dynamoDBMapper.save(user);
-        return user;
+    public Event createEvent(Event event) {
+        dynamoDBMapper.save(event);
+        return event;
     }
 
     @Override
@@ -41,6 +42,24 @@ public class EventServiceDaoImpl implements EventCrudDao {
         DynamoDBSaveExpression saveExpression = new DynamoDBSaveExpression().withExpected(expectedAttributeValueMap);
         dynamoDBMapper.save(event, saveExpression);
         return event;
+    }
+
+    @Override
+    public Student addStudent(Student student) {
+        Map<String, ExpectedAttributeValue> expectedAttributeValueMap = new HashMap<>();
+        expectedAttributeValueMap.put("GoingUsersIDs", new ExpectedAttributeValue(new AttributeValue().withS(student.getStudentId())));
+        DynamoDBSaveExpression saveExpression = new DynamoDBSaveExpression().withExpected(expectedAttributeValueMap);
+        dynamoDBMapper.save(student, saveExpression);
+        return student;
+    }
+
+    @Override
+    public Student addInterestedStudent(Student student) {
+        Map<String, ExpectedAttributeValue> expectedAttributeValueMap = new HashMap<>();
+        expectedAttributeValueMap.put("InterestedUsersIDs", new ExpectedAttributeValue(new AttributeValue().withS(student.getStudentId())));
+        DynamoDBSaveExpression saveExpression = new DynamoDBSaveExpression().withExpected(expectedAttributeValueMap);
+        dynamoDBMapper.save(student, saveExpression);
+        return student;
     }
 
     @Override
