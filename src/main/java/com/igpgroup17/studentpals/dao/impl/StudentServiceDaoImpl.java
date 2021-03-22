@@ -24,9 +24,9 @@ public class StudentServiceDaoImpl implements StudentCrudDao {
     }
 
     @Override
-    public Student createStudent(Student student) {
-        dynamoDBMapper.save(student);
-        return student;
+    public Student createStudent(Student user) {
+        dynamoDBMapper.save(user);
+        return user;
     }
 
     @Override

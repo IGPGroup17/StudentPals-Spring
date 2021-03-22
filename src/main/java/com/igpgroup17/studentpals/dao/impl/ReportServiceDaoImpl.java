@@ -23,9 +23,9 @@ public class ReportServiceDaoImpl implements ReportCrudDao {
     public ReportServiceDaoImpl(DynamoDBMapper dynamoDBMapper) { this.dynamoDBMapper = dynamoDBMapper; }
 
     @Override
-    public Reports createReport(Reports reports) {
-        dynamoDBMapper.save(reports);
-        return reports;
+    public Reports createReport(Reports user) {
+        dynamoDBMapper.save(user);
+        return user;
     }
 
     @Override

@@ -24,9 +24,9 @@ public class OrganiserServiceDaoImpl implements OrganiserCrudDao {
     }
 
     @Override
-    public Organiser createOrganiser(Organiser organiser) {
-        dynamoDBMapper.save(organiser);
-        return organiser;
+    public Organiser createOrganiser(Organiser user) {
+        dynamoDBMapper.save(user);
+        return user;
     }
 
     @Override
