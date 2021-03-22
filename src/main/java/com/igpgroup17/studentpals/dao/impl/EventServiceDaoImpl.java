@@ -47,7 +47,7 @@ public class EventServiceDaoImpl implements EventCrudDao {
     @Override
     public Student addStudent(Student student) {
         Map<String, ExpectedAttributeValue> expectedAttributeValueMap = new HashMap<>();
-        expectedAttributeValueMap.put("GoingUsersIDs", new ExpectedAttributeValue(new AttributeValue().withS(student.getStudentId())));
+        expectedAttributeValueMap.put("goingUsersIDs", new ExpectedAttributeValue(new AttributeValue().withS(student.getStudentId())));
         DynamoDBSaveExpression saveExpression = new DynamoDBSaveExpression().withExpected(expectedAttributeValueMap);
         dynamoDBMapper.save(student, saveExpression);
         return student;
@@ -56,7 +56,7 @@ public class EventServiceDaoImpl implements EventCrudDao {
     @Override
     public void removeStudent(String studentId) {
         Map<String, ExpectedAttributeValue> expectedAttributeValueMap = new HashMap<>();
-        expectedAttributeValueMap.put("GoingUsersIDs", new ExpectedAttributeValue(new AttributeValue().withS(studentId)));
+        expectedAttributeValueMap.put("goingUsersIDs", new ExpectedAttributeValue(new AttributeValue().withS(studentId)));
         DynamoDBDeleteExpression deleteExpression = new DynamoDBDeleteExpression().withExpected(expectedAttributeValueMap);
         Event event = Event.builder()
                 .eventID(studentId)
@@ -67,7 +67,7 @@ public class EventServiceDaoImpl implements EventCrudDao {
     @Override
     public Student addInterestedStudent(Student student) {
         Map<String, ExpectedAttributeValue> expectedAttributeValueMap = new HashMap<>();
-        expectedAttributeValueMap.put("InterestedUsersIds", new ExpectedAttributeValue(new AttributeValue().withS(student.getStudentId())));
+        expectedAttributeValueMap.put("interestedUsersIds", new ExpectedAttributeValue(new AttributeValue().withS(student.getStudentId())));
         DynamoDBSaveExpression saveExpression = new DynamoDBSaveExpression().withExpected(expectedAttributeValueMap);
         dynamoDBMapper.save(student, saveExpression);
         return student;
@@ -76,7 +76,7 @@ public class EventServiceDaoImpl implements EventCrudDao {
     @Override
     public void removeInterestedStudent(String studentId) {
         Map<String, ExpectedAttributeValue> expectedAttributeValueMap = new HashMap<>();
-        expectedAttributeValueMap.put("InterestedUsersIds", new ExpectedAttributeValue(new AttributeValue().withS(studentId)));
+        expectedAttributeValueMap.put("interestedUsersIds", new ExpectedAttributeValue(new AttributeValue().withS(studentId)));
         DynamoDBDeleteExpression deleteExpression = new DynamoDBDeleteExpression().withExpected(expectedAttributeValueMap);
         Event event = Event.builder()
                 .eventID(studentId)
