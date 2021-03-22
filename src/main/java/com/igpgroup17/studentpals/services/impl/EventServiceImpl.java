@@ -26,7 +26,19 @@ public class EventServiceImpl implements EventService {
     public Student addStudent(Student student) {return this.eventCrudDao.addStudent(student); }
 
     @Override
+    public String removeStudent(String studentId) {
+        eventCrudDao.removeStudent(studentId);
+        return "Removed student from event";
+    }
+
+    @Override
     public Student addInterestedStudent(Student student) {return this.eventCrudDao.addInterestedStudent(student); }
+
+    @Override
+    public String removeInterestedStudent(String studentId) {
+        eventCrudDao.removeInterestedStudent(studentId);
+        return "Removed interested student from event";
+    }
 
     @Override
     public Event readEvent(String id) {

@@ -10,7 +10,11 @@ public interface EventService {
 
     Student addStudent(Student student);
 
+    String removeStudent(String studentId);
+
     Student addInterestedStudent(Student student);
+
+    String removeInterestedStudent(String studentId);
 
     Event updateEvent(Event event);
 
