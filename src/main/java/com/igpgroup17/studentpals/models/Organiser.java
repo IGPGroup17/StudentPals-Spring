@@ -22,7 +22,6 @@ public class Organiser {
     @DynamoDBAttribute(attributeName = "profileId")
     private String profileId;
 
-
     @DynamoDBAttribute(attributeName = "organisationName")
     private String organisationName;
 

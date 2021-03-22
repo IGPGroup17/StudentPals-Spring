@@ -33,6 +33,4 @@ public class Reports {
     @DynamoDBAttribute(attributeName = "reportRating")
     private String reportRating;
 
-
-
 }
