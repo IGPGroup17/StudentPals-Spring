@@ -4,7 +4,6 @@ import com.igpgroup17.studentpals.models.Student;
 import com.igpgroup17.studentpals.models.requestbody.RequestBodyStudent;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class RequestBodyStudentAdapter {
 
@@ -16,6 +15,7 @@ public class RequestBodyStudentAdapter {
                 .email(student.getEmail())
                 .age(student.getAge())
                 .gender(student.getGender())
+                .year(student.getYear())
                 .universityName(student.getUniversityName())
                 .universityEmail(student.getUniversityEmail())
                 .course(student.getCourse())
