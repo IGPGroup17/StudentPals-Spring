@@ -23,12 +23,6 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Student addStudent(Student student) {return this.eventCrudDao.addStudent(student); }
-
-    @Override
-    public Student addInterestedStudent(Student student) {return this.eventCrudDao.addInterestedStudent(student); }
-
-    @Override
     public Event readEvent(String id) {
         return eventCrudDao.readEvent(id);
     }
