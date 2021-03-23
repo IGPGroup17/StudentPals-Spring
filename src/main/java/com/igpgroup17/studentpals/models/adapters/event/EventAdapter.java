@@ -1,4 +1,4 @@
-package com.igpgroup17.studentpals.models.adapters;
+package com.igpgroup17.studentpals.models.adapters.event;
 
 import com.igpgroup17.studentpals.models.Event;
 import com.igpgroup17.studentpals.models.requestbody.RequestBodyEvent;
