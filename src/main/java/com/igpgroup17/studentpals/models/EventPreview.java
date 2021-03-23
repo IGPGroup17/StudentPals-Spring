@@ -9,13 +9,13 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class EventPreview {
 
-    private String eventId;
+    private final String eventId;
 
-    private String name;
+    private final String name;
 
-    private String description;
+    private final String description;
 
-    private String dateTime;
+    private final String dateTime;
 
-    private int likes;
+    private final int likes;
 }

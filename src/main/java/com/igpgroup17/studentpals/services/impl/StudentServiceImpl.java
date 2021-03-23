@@ -73,6 +73,6 @@ public class StudentServiceImpl implements StudentService {
 
         eventService.updateEvent(event);
         studentCrudDao.updateStudent(student);
-        return null;
+        return event;
     }
 }
