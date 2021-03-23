@@ -1,7 +1,6 @@
 package com.igpgroup17.studentpals.controllers;
 
-import com.igpgroup17.studentpals.models.Event;
-import com.igpgroup17.studentpals.models.adapters.EventAdapter;
+import com.igpgroup17.studentpals.models.adapters.event.EventAdapter;
 import com.igpgroup17.studentpals.models.requestbody.RequestBodyEvent;
 import com.igpgroup17.studentpals.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;

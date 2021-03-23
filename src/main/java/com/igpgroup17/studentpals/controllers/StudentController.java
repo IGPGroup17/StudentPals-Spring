@@ -35,4 +35,9 @@ public class StudentController {
     public ResponseEntity<?> deleteStudentById(@PathVariable(name = "id") String id) {
         return ResponseEntity.ok(studentService.deleteStudent(id));
     }
+
+    @GetMapping
+    public ResponseEntity<?> getLikedEvents(@PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(studentService.getLikedEvents(id));
+    }
 }

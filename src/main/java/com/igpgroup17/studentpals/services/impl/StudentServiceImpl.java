@@ -1,11 +1,14 @@
 package com.igpgroup17.studentpals.services.impl;
 
 import com.igpgroup17.studentpals.dao.StudentCrudDao;
+import com.igpgroup17.studentpals.models.EventPreview;
 import com.igpgroup17.studentpals.models.Student;
 import com.igpgroup17.studentpals.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -36,5 +39,11 @@ public class StudentServiceImpl implements StudentService {
     public String deleteStudent(String id) {
         studentCrudDao.deleteStudent(id);
         return "Deleted student";
+    }
+
+    @Override
+    public List<EventPreview> getLikedEvents(String id) {
+        List<String> events = studentCrudDao.readStudent(id).getInterestedEvents();
+        return null;
     }
 }

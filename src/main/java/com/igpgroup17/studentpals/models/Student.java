@@ -6,6 +6,8 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -44,4 +46,7 @@ public class Student {
 
     @DynamoDBAttribute(attributeName = "course")
     private String course;
+
+    @DynamoDBAttribute(attributeName = "interestedEvents")
+    private List<String> interestedEvents;
 }
