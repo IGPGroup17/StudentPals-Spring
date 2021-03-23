@@ -19,6 +19,9 @@ public class EventAdapter {
                 .state("SCHEDULED")
                 .goingUsersIDs(new ArrayList<>())
                 .interestedUsersIDs(new ArrayList<>())
+                .isAlcoholFree(event.isAlcoholFree())
+                .isInPerson(event.isInPerson())
+                .isVirtual(event.isInPerson())
                 .build();
     }
 }
