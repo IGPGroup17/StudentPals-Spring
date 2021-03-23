@@ -8,10 +8,6 @@ public interface EventService {
 
     Event readEvent(String id);
 
-    Student addStudent(Student student);
-
-    Student addInterestedStudent(Student student);
-
     Event updateEvent(Event event);
 
     String deleteEvent(String id);
