@@ -44,4 +44,13 @@ public class Event {
     @DynamoDBAttribute(attributeName = "scheduledTime")
     private String scheduledTime;
 
+    @DynamoDBAttribute(attributeName = "isVirtual")
+    private boolean isVirtual;
+
+    @DynamoDBAttribute(attributeName = "isAlcoholFree")
+    private boolean isAlcoholFree;
+
+    @DynamoDBAttribute(attributeName = "isInPerson")
+    private boolean isInPerson;
+
 }
