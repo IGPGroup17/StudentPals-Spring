@@ -16,4 +16,10 @@ public class RequestBodyEvent {
     private String organiserId;
 
     private String scheduledTime;
+
+    private boolean isVirtual;
+
+    private boolean isInPerson;
+
+    private boolean isAlcoholFree;
 }

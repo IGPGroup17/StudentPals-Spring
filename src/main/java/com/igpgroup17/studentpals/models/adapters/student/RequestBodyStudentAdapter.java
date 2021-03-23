@@ -10,7 +10,7 @@ public class RequestBodyStudentAdapter {
 
     public Student toStudent(RequestBodyStudent student) {
         return Student.builder()
-                .studentId(UUID.randomUUID().toString())
+                .studentId(student.getStudentId())
                 .realName(student.getRealName())
                 .username(student.getUsername())
                 .email(student.getEmail())
