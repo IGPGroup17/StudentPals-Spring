@@ -4,6 +4,7 @@ import com.igpgroup17.studentpals.models.Student;
 import com.igpgroup17.studentpals.models.adapters.student.RequestBodyStudentAdapter;
 import com.igpgroup17.studentpals.models.requestbody.RequestBodyStudent;
 import com.igpgroup17.studentpals.services.StudentService;
+import com.igpgroup17.studentpals.util.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class StudentController {
     @GetMapping("/v1/students/{id}")
     public ResponseEntity<?> getStudentById(@PathVariable(name = "id") String id) {
         Student student = studentService.readStudent(id);
-        return student == null ? new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND) : ResponseEntity.ok(studentService.readStudent(id));
+        return student == null ? new ResponseEntity<>(ErrorMessage.of("Not Found"), HttpStatus.NOT_FOUND) : ResponseEntity.ok(studentService.readStudent(id));
     }
 
     @PostMapping("/v1/students")
