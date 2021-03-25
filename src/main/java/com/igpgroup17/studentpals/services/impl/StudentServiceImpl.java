@@ -51,7 +51,7 @@ public class StudentServiceImpl implements StudentService {
     // very inefficient - use batch requests later
     @Override
     public List<EventPreview> getLikedEvents(String id) {
-        return studentCrudDao.readStudent(id).getInterestedEvents().stream()
+        return studentCrudDao.readStudent(id).getLikedEvents().stream()
                 .map(eventService::readEvent)
                 .map(EventPreviewAdapter::adapt)
                 .collect(Collectors.toList());
@@ -59,6 +59,55 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Event addLike(String studentId, String eventId) {
+        Student student = studentCrudDao.readStudent(studentId);
+
+        List<String> likedEvents = ListUtils.copyOf(student.getLikedEvents());
+
+        likedEvents.add(eventId);
+
+        student.setInterestedEvents(likedEvents);
+
+        studentCrudDao.updateStudent(student);
+        return eventService.readEvent(eventId);
+    }
+
+    @Override
+    public List<EventPreview> getGoingEvents(String id) {
+        return studentCrudDao.readStudent(id).getGoingEvents().stream()
+                .map(eventService::readEvent)
+                .map(EventPreviewAdapter::adapt)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Event addGoing(String studentId, String eventId) {
+        Student student = studentCrudDao.readStudent(studentId);
+        Event event = eventService.readEvent(eventId);
+
+        List<String> likedEvents = ListUtils.copyOf(student.getGoingEvents());
+        List<String> interestedUsers = ListUtils.copyOf(event.getGoingUsersIDs());
+
+        likedEvents.add(eventId);
+        interestedUsers.add(studentId);
+
+        student.setGoingEvents(likedEvents);
+        event.setGoingUsersIDs(interestedUsers);
+
+        eventService.updateEvent(event);
+        studentCrudDao.updateStudent(student);
+        return event;
+    }
+
+    @Override
+    public List<EventPreview> getInterestedEvents(String id) {
+        return studentCrudDao.readStudent(id).getLikedEvents().stream()
+                .map(eventService::readEvent)
+                .map(EventPreviewAdapter::adapt)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Event addInterested(String studentId, String eventId) {
         Student student = studentCrudDao.readStudent(studentId);
         Event event = eventService.readEvent(eventId);
 

@@ -20,4 +20,12 @@ public interface StudentService {
     List<EventPreview> getLikedEvents(String id);
 
     Event addLike(String studentId, String eventId);
+
+    List<EventPreview> getGoingEvents(String id);
+
+    Event addGoing(String studentId, String eventId);
+
+    List<EventPreview> getInterestedEvents(String id);
+
+    Event addInterested(String studentId, String eventId);
 }

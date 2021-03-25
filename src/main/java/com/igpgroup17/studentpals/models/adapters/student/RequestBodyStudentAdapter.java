@@ -20,6 +20,8 @@ public class RequestBodyStudentAdapter {
                 .universityEmail(student.getUniversityEmail())
                 .course(student.getCourse())
                 .interestedEvents(new ArrayList<>())
+                .likedEvents(new ArrayList<>())
+                .goingEvents(new ArrayList<>())
                 .build();
     }
 }
