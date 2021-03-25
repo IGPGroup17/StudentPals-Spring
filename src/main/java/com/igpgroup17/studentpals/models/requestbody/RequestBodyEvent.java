@@ -17,9 +17,9 @@ public class RequestBodyEvent {
 
     private String scheduledTime;
 
-    private boolean isVirtual;
+    private Boolean isVirtual;
 
-    private boolean isInPerson;
+    private Boolean isInPerson;
 
-    private boolean isAlcoholFree;
+    private Boolean isAlcoholFree;
 }
