@@ -9,6 +9,7 @@ import java.util.UUID;
 public class EventAdapter {
 
     public static Event fromRequestBodyEvent(RequestBodyEvent event) {
+        System.out.println(event.getIsAlcoholFree());
         return Event.builder()
                 .eventID(UUID.randomUUID().toString())
                 .name(event.getName())
@@ -19,9 +20,9 @@ public class EventAdapter {
                 .state("SCHEDULED")
                 .goingUsersIDs(new ArrayList<>())
                 .interestedUsersIDs(new ArrayList<>())
-                .isAlcoholFree(event.isAlcoholFree())
-                .isInPerson(event.isInPerson())
-                .isVirtual(event.isInPerson())
+                .isAlcoholFree(event.getIsAlcoholFree())
+                .isInPerson(event.getIsInPerson())
+                .isVirtual(event.getIsVirtual())
                 .build();
     }
 }
