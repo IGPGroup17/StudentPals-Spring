@@ -26,13 +26,18 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.createReview(review));
     }
 
-    @PutMapping("/v1/review")
+    @PutMapping("/v1/reviews")
     public ResponseEntity<?> updateReview(@RequestBody Review review) {
         return ResponseEntity.ok(reviewService.updateReview(review));
     }
 
-    @DeleteMapping("/v1/review/{id}")
+    @DeleteMapping("/v1/reviews/{id}")
     public ResponseEntity<?> deleteReviewById(@PathVariable(name = "id") String id) {
         return ResponseEntity.ok(reviewService.deleteReview(id));
+    }
+
+    @GetMapping("/v1/reviews/all/{organiserId")
+    public ResponseEntity<?> getReviewsFor(@PathVariable(name = "organiserId") String id) {
+        return ResponseEntity.ok(reviewService.getReviewsFor(id));
     }
 }

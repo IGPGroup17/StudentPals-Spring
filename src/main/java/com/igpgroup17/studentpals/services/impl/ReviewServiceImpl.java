@@ -6,6 +6,8 @@ import com.igpgroup17.studentpals.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReviewServiceImpl implements ReviewService {
 
@@ -33,5 +35,10 @@ public class ReviewServiceImpl implements ReviewService {
     public String deleteReview(String id) {
         reviewCrudDao.deleteReview(id);
         return "Deleted review";
+    }
+
+    @Override
+    public List<Review> getReviewsFor(String id) {
+        return reviewCrudDao.getReviewsFor(id);
     }
 }
