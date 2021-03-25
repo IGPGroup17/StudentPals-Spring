@@ -49,4 +49,10 @@ public class Student {
 
     @DynamoDBAttribute(attributeName = "interestedEvents")
     private List<String> interestedEvents;
+
+    @DynamoDBAttribute(attributeName = "likedEvents")
+    private List<String> likedEvents;
+
+    @DynamoDBAttribute(attributeName = "goingEvents")
+    private List<String> goingEvents;
 }

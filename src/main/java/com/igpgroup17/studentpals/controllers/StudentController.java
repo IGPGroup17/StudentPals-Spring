@@ -50,4 +50,24 @@ public class StudentController {
     public ResponseEntity<?> addLikedEvent(@PathVariable(name = "studentId") String studentId, @PathVariable(name = "eventId") String eventId) {
         return ResponseEntity.ok(studentService.addLike(studentId, eventId));
     }
+
+    @GetMapping("/v1/students/going/{id}")
+    public ResponseEntity<?> getGoingEvents(@PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(studentService.getLikedEvents(id));
+    }
+
+    @PutMapping("/v1/students/going/{studentId}/{eventId}")
+    public ResponseEntity<?> addGoingEvent(@PathVariable(name = "studentId") String studentId, @PathVariable(name = "eventId") String eventId) {
+        return ResponseEntity.ok(studentService.addLike(studentId, eventId));
+    }
+
+    @GetMapping("/v1/students/interested/{id}")
+    public ResponseEntity<?> getInterestedEvents(@PathVariable(name = "id") String id) {
+        return ResponseEntity.ok(studentService.getLikedEvents(id));
+    }
+
+    @PutMapping("/v1/students/interested/{studentId}/{eventId}")
+    public ResponseEntity<?> addInterestedEvent(@PathVariable(name = "studentId") String studentId, @PathVariable(name = "eventId") String eventId) {
+        return ResponseEntity.ok(studentService.addLike(studentId, eventId));
+    }
 }
