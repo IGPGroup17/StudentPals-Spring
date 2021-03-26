@@ -46,9 +46,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public String deleteStudent(String id) {
+    public Student deleteStudent(String id) {
+        Student student = studentCrudDao.readStudent(id);
         studentCrudDao.deleteStudent(id);
-        return "Deleted student";
+        return student;
     }
 
     // very inefficient - use batch requests later

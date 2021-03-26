@@ -15,7 +15,7 @@ public interface StudentService {
 
     Student updateStudent(Student student);
 
-    String deleteStudent(String id);
+    Student deleteStudent(String id);
 
     List<Event> getLikedEvents(String id);
 
