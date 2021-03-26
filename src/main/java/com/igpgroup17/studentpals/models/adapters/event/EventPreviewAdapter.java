@@ -6,6 +6,6 @@ import com.igpgroup17.studentpals.models.EventPreview;
 public class EventPreviewAdapter {
 
     public static EventPreview adapt(Event event) {
-        return EventPreview.builder().name(event.getName()).dateTime(event.getScheduledTime()).likes(event.getLikes()).build();
+        return EventPreview.builder().eventId(event.getEventID()).description(event.getDescription()).name(event.getName()).dateTime(event.getScheduledTime()).likes(event.getLikes()).build();
     }
 }

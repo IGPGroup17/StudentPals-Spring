@@ -8,6 +8,8 @@ import com.igpgroup17.studentpals.models.adapters.event.EventPreviewAdapter;
 import com.igpgroup17.studentpals.services.EventService;
 import com.igpgroup17.studentpals.services.StudentService;
 import com.igpgroup17.studentpals.util.ListUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,8 @@ import java.util.stream.Collectors;
 public class StudentServiceImpl implements StudentService {
 
     private final StudentCrudDao studentCrudDao;
+
+    private final Logger LOGGER = LoggerFactory.getLogger(StudentServiceImpl.class);
 
     private final EventService eventService;
 
@@ -51,9 +55,11 @@ public class StudentServiceImpl implements StudentService {
     // very inefficient - use batch requests later
     @Override
     public List<EventPreview> getLikedEvents(String id) {
-        return studentCrudDao.readStudent(id).getLikedEvents().stream()
-                .map(eventService::readEvent)
-                .map(EventPreviewAdapter::adapt)
+        List<Event> events = studentCrudDao.readStudent(id).getLikedEvents().stream()
+                .map(eventService::readEvent).collect(Collectors.toList());
+
+        LOGGER.info(events.stream().map(Event::getEventID).collect(Collectors.joining(", ")));
+        return events.stream().map(EventPreviewAdapter::adapt)
                 .collect(Collectors.toList());
     }
 
@@ -65,7 +71,9 @@ public class StudentServiceImpl implements StudentService {
 
         likedEvents.add(eventId);
 
-        student.setInterestedEvents(likedEvents);
+        student.setLikedEvents(likedEvents);
+
+        LOGGER.info(student.getLikedEvents().stream().collect(Collectors.joining(", ")));
 
         studentCrudDao.updateStudent(student);
         return eventService.readEvent(eventId);
@@ -84,14 +92,14 @@ public class StudentServiceImpl implements StudentService {
         Student student = studentCrudDao.readStudent(studentId);
         Event event = eventService.readEvent(eventId);
 
-        List<String> likedEvents = ListUtils.copyOf(student.getGoingEvents());
-        List<String> interestedUsers = ListUtils.copyOf(event.getGoingUsersIDs());
+        List<String> goingEvents = ListUtils.copyOf(student.getGoingEvents());
+        List<String> goingUsersIDs = ListUtils.copyOf(event.getGoingUsersIDs());
 
-        likedEvents.add(eventId);
-        interestedUsers.add(studentId);
+        goingEvents.add(eventId);
+        goingUsersIDs.add(studentId);
 
-        student.setGoingEvents(likedEvents);
-        event.setGoingUsersIDs(interestedUsers);
+        student.setGoingEvents(goingEvents);
+        event.setGoingUsersIDs(goingUsersIDs);
 
         eventService.updateEvent(event);
         studentCrudDao.updateStudent(student);
@@ -111,13 +119,13 @@ public class StudentServiceImpl implements StudentService {
         Student student = studentCrudDao.readStudent(studentId);
         Event event = eventService.readEvent(eventId);
 
-        List<String> likedEvents = ListUtils.copyOf(student.getInterestedEvents());
+        List<String> interestedEvents = ListUtils.copyOf(student.getInterestedEvents());
         List<String> interestedUsers = ListUtils.copyOf(event.getInterestedUsersIDs());
 
-        likedEvents.add(eventId);
+        interestedEvents.add(eventId);
         interestedUsers.add(studentId);
 
-        student.setInterestedEvents(likedEvents);
+        student.setInterestedEvents(interestedEvents);
         event.setInterestedUsersIDs(interestedUsers);
 
         eventService.updateEvent(event);
