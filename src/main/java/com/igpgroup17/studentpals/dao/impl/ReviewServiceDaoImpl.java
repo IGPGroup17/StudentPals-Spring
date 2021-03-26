@@ -1,9 +1,6 @@
 package com.igpgroup17.studentpals.dao.impl;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDeleteExpression;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBSaveExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.amazonaws.services.dynamodbv2.document.ItemCollection;
 import com.amazonaws.services.dynamodbv2.document.QueryOutcome;
 import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
@@ -64,9 +61,9 @@ public class ReviewServiceDaoImpl implements ReviewCrudDao {
     public List<Review> getReviewsFor(String id) {
         Map<String, AttributeValue> eav = new HashMap<>();
         eav.put(":id", new AttributeValue().withS(id));
-        DynamoDBQueryExpression<Review> queryExpression = new DynamoDBQueryExpression<Review>()
+        DynamoDBScanExpression queryExpression = new DynamoDBScanExpression()
                 .withFilterExpression("organiserId = :id")
                 .withExpressionAttributeValues(eav);
-        return dynamoDBMapper.query(Review.class, queryExpression);
+        return dynamoDBMapper.parallelScan(Review.class, queryExpression, 5);
     }
 }
