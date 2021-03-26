@@ -12,7 +12,7 @@ public interface EventService {
 
     Event updateEvent(Event event);
 
-    String deleteEvent(String id);
+    Event deleteEvent(String id);
 
     List<Event> getAllEventsFor(String organiserId);
 }

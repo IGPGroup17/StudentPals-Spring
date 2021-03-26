@@ -2,9 +2,7 @@ package com.igpgroup17.studentpals.services.impl;
 
 import com.igpgroup17.studentpals.dao.StudentCrudDao;
 import com.igpgroup17.studentpals.models.Event;
-import com.igpgroup17.studentpals.models.EventPreview;
 import com.igpgroup17.studentpals.models.Student;
-import com.igpgroup17.studentpals.models.adapters.event.EventPreviewAdapter;
 import com.igpgroup17.studentpals.services.EventService;
 import com.igpgroup17.studentpals.services.StudentService;
 import com.igpgroup17.studentpals.util.ListUtils;
@@ -13,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -87,9 +84,16 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Event> getGoingEvents(String id) {
-        return studentCrudDao.readStudent(id).getGoingEvents().stream()
-                .map(eventService::readEvent)
-                .collect(Collectors.toList());
+        Student student = studentCrudDao.readStudent(id);
+        List<Event> events = student.getGoingEvents().stream()
+                .map(eventService::readEvent).filter(Objects::nonNull).collect(Collectors.toList());
+
+        student.setGoingEvents(events.stream().map(Event::getEventID).collect(Collectors.toList()));
+
+        updateStudent(student);
+
+        LOGGER.info(events.stream().map(e -> e.getEventID() == null ? "null" : e.getEventID()).collect(Collectors.joining(", ")));
+        return events;
     }
 
     @Override
@@ -113,9 +117,16 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Event> getInterestedEvents(String id) {
-        return studentCrudDao.readStudent(id).getLikedEvents().stream()
-                .map(eventService::readEvent)
-                .collect(Collectors.toList());
+        Student student = studentCrudDao.readStudent(id);
+        List<Event> events = student.getInterestedEvents().stream()
+                .map(eventService::readEvent).filter(Objects::nonNull).collect(Collectors.toList());
+
+        student.setInterestedEvents(events.stream().map(Event::getEventID).collect(Collectors.toList()));
+
+        updateStudent(student);
+
+        LOGGER.info(events.stream().map(e -> e.getEventID() == null ? "null" : e.getEventID()).collect(Collectors.joining(", ")));
+        return events;
     }
 
     @Override
