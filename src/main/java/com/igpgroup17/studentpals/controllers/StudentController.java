@@ -53,7 +53,7 @@ public class StudentController {
 
     @GetMapping("/v1/students/going/{id}")
     public ResponseEntity<?> getGoingEvents(@PathVariable(name = "id") String id) {
-        return ResponseEntity.ok(studentService.getLikedEvents(id));
+        return ResponseEntity.ok(studentService.getGoingEvents(id));
     }
 
     @PutMapping("/v1/students/going/{studentId}/{eventId}")
