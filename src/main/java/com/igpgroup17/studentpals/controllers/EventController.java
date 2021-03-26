@@ -36,4 +36,9 @@ public class EventController {
     public ResponseEntity<?> deleteEventById(@PathVariable(name = "id") String id) {
         return ResponseEntity.ok(eventService.deleteEvent(id));
     }
+
+    @GetMapping("/v1/events/all/{id}")
+    public ResponseEntity<?> getAllEventsFor(@PathVariable(name = "id") String organiserId) {
+        return ResponseEntity.ok(eventService.getAllEventsFor(organiserId));
+    }
 }
