@@ -69,8 +69,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Event addLike(String studentId, String eventId) {
         Student student = studentCrudDao.readStudent(studentId);
+        Event event = eventService.readEvent(eventId);
 
         List<String> likedEvents = ListUtils.copyOf(student.getLikedEvents());
+
+        event.setLikes(event.getLikes() + 1);
 
         likedEvents.add(eventId);
 
@@ -79,6 +82,7 @@ public class StudentServiceImpl implements StudentService {
         LOGGER.info(student.getLikedEvents().stream().collect(Collectors.joining(", ")));
 
         studentCrudDao.updateStudent(student);
+        eventService.updateEvent(event);
         return eventService.readEvent(eventId);
     }
 
