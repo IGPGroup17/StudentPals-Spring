@@ -3,15 +3,18 @@ package com.igpgroup17.studentpals.dao.impl;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDeleteExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBSaveExpression;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.ExpectedAttributeValue;
 import com.igpgroup17.studentpals.dao.EventCrudDao;
 import com.igpgroup17.studentpals.models.Event;
+import com.igpgroup17.studentpals.models.Review;
 import com.igpgroup17.studentpals.models.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -53,5 +56,14 @@ public class EventServiceDaoImpl implements EventCrudDao {
                 .eventID(eventId)
                 .build();
         dynamoDBMapper.delete(event, deleteExpression);
+    }
+
+    @Override
+    public List<Event> getAllEventsFor(String organiserId) {
+        Map<String, AttributeValue> expectedAttributeValueMap = new HashMap<>();
+        expectedAttributeValueMap.put(":organiserId", new AttributeValue().withS(organiserId));
+        DynamoDBScanExpression expression = new DynamoDBScanExpression().withFilterExpression("organiserId = :organiserId").withExpressionAttributeValues(expectedAttributeValueMap);
+
+        return dynamoDBMapper.parallelScan(Event.class, expression, 5);
     }
 }

@@ -13,7 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,10 +57,15 @@ public class StudentServiceImpl implements StudentService {
     // very inefficient - use batch requests later
     @Override
     public List<Event> getLikedEvents(String id) {
-        List<Event> events = studentCrudDao.readStudent(id).getLikedEvents().stream()
-                .map(eventService::readEvent).collect(Collectors.toList());
+        Student student = studentCrudDao.readStudent(id);
+        List<Event> events = student.getLikedEvents().stream()
+                .map(eventService::readEvent).filter(Objects::nonNull).collect(Collectors.toList());
 
-        LOGGER.info(events.stream().map(Event::getEventID).collect(Collectors.joining(", ")));
+        student.setLikedEvents(events.stream().map(Event::getEventID).collect(Collectors.toList()));
+
+        updateStudent(student);
+
+        LOGGER.info(events.stream().map(e -> e.getEventID() == null ? "null" : e.getEventID()).collect(Collectors.joining(", ")));
         return events;
     }
 
