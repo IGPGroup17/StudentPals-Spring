@@ -17,15 +17,15 @@ public interface StudentService {
 
     String deleteStudent(String id);
 
-    List<EventPreview> getLikedEvents(String id);
+    List<Event> getLikedEvents(String id);
 
     Event addLike(String studentId, String eventId);
 
-    List<EventPreview> getGoingEvents(String id);
+    List<Event> getGoingEvents(String id);
 
     Event addGoing(String studentId, String eventId);
 
-    List<EventPreview> getInterestedEvents(String id);
+    List<Event> getInterestedEvents(String id);
 
     Event addInterested(String studentId, String eventId);
 }
