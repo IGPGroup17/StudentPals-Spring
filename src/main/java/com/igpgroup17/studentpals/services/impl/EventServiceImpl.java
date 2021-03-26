@@ -35,9 +35,10 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public String deleteEvent(String id) {
+    public Event deleteEvent(String id) {
+        Event event = eventCrudDao.readEvent(id);
         eventCrudDao.deleteEvent(id);
-        return "Deleted event";
+        return event;
     }
 
     @Override
