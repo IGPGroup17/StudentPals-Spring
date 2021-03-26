@@ -36,7 +36,7 @@ public class ReviewController {
         return ResponseEntity.ok(reviewService.deleteReview(id));
     }
 
-    @GetMapping("/v1/reviews/all/{organiserId")
+    @GetMapping("/v1/reviews/all/{organiserId}")
     public ResponseEntity<?> getReviewsFor(@PathVariable(name = "organiserId") String id) {
         return ResponseEntity.ok(reviewService.getReviewsFor(id));
     }
