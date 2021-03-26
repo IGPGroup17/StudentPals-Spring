@@ -54,13 +54,12 @@ public class StudentServiceImpl implements StudentService {
 
     // very inefficient - use batch requests later
     @Override
-    public List<EventPreview> getLikedEvents(String id) {
+    public List<Event> getLikedEvents(String id) {
         List<Event> events = studentCrudDao.readStudent(id).getLikedEvents().stream()
                 .map(eventService::readEvent).collect(Collectors.toList());
 
         LOGGER.info(events.stream().map(Event::getEventID).collect(Collectors.joining(", ")));
-        return events.stream().map(EventPreviewAdapter::adapt)
-                .collect(Collectors.toList());
+        return events;
     }
 
     @Override
@@ -80,10 +79,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<EventPreview> getGoingEvents(String id) {
+    public List<Event> getGoingEvents(String id) {
         return studentCrudDao.readStudent(id).getGoingEvents().stream()
                 .map(eventService::readEvent)
-                .map(EventPreviewAdapter::adapt)
                 .collect(Collectors.toList());
     }
 
@@ -107,10 +105,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<EventPreview> getInterestedEvents(String id) {
+    public List<Event> getInterestedEvents(String id) {
         return studentCrudDao.readStudent(id).getLikedEvents().stream()
                 .map(eventService::readEvent)
-                .map(EventPreviewAdapter::adapt)
                 .collect(Collectors.toList());
     }
 
